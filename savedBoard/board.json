@@ -1,0 +1,99 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "DiversifyBipartiteMonkeyExperimentData",
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col_width": 8,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"timeframe": 60,
+						"blocks": "8",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"DiversifyNumberOfSatisfiedRequest\"]",
+						"series1X": "time_stamp",
+						"series1Y": "value",
+						"series2": "datasources[\"DiversifyNumberOfServiceAvailable\"]",
+						"series2X": "time_stamp",
+						"series2Y": "value",
+						"series3": "datasources[\"DiversifyNumberOfRetry\"]",
+						"series3X": "time_stamp",
+						"series3Y": "value"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "DiversifyNumberOfSatisfiedRequest",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.client"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfServiceAvailable",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.monkey"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfRetry",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.retry"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		}
+	],
+	"columns": 4
+}
