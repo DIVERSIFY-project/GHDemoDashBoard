@@ -84,7 +84,7 @@ function connectToExternalSources() {
 			
 //			newEventCallback(eventNames[i], message);
 			
-		}
+//		}
 //	}, refreshTimer);
 	
 }
