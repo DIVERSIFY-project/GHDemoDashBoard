@@ -15,7 +15,7 @@ var namespace = '/shows';
 var room = 'got';
 var refreshTimer = 1000; 
 var connectionscounter = 0;
-var eventNames = ['diversify.bipartite.client', 'diversify.bipartite.monkey', 'diversify.bipartite.retry'];
+var eventNames = ['diversify.bipartite.dead', 'diversify.bipartite.retry', 'diversify.bipartite.service'];
 var serverport = 8181;
 
 /*

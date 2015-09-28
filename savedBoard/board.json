@@ -23,9 +23,9 @@
 					"settings": {
 						"timeframe": 60,
 						"blocks": "4",
-						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
 						"yaxis": "{\"title\":{\"text\" : \"% of unstatisfied requests\"}, \"minorTickInterval\":\"auto\", \"floor\":0, \"min\": 0, \"max\":100}",
-						"series1": "datasources[\"DiversifyNumberOfSatisfiedRequest\"]",
+						"series1": "datasources[\"DiversifyNumberOfUnsatisfiedRequest\"]",
 						"series1X": "time_stamp",
 						"series1Y": "value",
 						"series2": "",
@@ -54,7 +54,7 @@
 					"settings": {
 						"timeframe": 60,
 						"blocks": 4,
-						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
 						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
 						"series1": "datasources[\"DiversifyNumberOfRetry\"]",
 						"series1X": "time_stamp",
@@ -79,7 +79,7 @@
 					"settings": {
 						"timeframe": 60,
 						"blocks": 4,
-						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
 						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
 						"series1": "datasources[\"DiversifyNumberOfServiceAvailable\"]",
 						"series1X": "time_stamp",
@@ -162,13 +162,13 @@
 	],
 	"datasources": [
 		{
-			"name": "DiversifyNumberOfSatisfiedRequest",
+			"name": "DiversifyNumberOfUnsatisfiedRequest",
 			"type": "node_js",
 			"settings": {
 				"url": "http://localhost:8181/shows",
 				"events": [
 					{
-						"eventName": "diversify.bipartite.client"
+						"eventName": "diversify.bipartite.dead"
 					}
 				],
 				"rooms": [
@@ -186,7 +186,7 @@
 				"url": "http://localhost:8181/shows",
 				"events": [
 					{
-						"eventName": "diversify.bipartite.monkey"
+						"eventName": "diversify.bipartite.service"
 					}
 				],
 				"rooms": [
