@@ -63,7 +63,7 @@
 				"name" : "xaxis",
 				"display_name" : "X-Axis",
 				"type" : "calculated",
-				"default_value" : "{\"title\":{\"text\" : \"Time\"}, \"type\": \"datetime\", \"floor\":0}"
+				"default_value" : "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}"
 			},
 			{
 				"name" : "yaxis",
@@ -208,7 +208,7 @@
 					console.log(last)
 					// Check if time frame is complete
 					if (last-first>timeframeMS) {
-						shift = true;
+						//shift = true;
 					}
 				}
 				

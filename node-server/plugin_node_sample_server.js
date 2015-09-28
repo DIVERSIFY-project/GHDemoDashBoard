@@ -43,49 +43,49 @@ function newEventCallback(eventName, message) {
 
 // Connection to external data sources
 function connectToExternalSources() {
-	
-  	ws = new WebSocket('ws://www.host.com/path');
+  	ws = new WebSocket('ws://localhost:8099');
 	ws.on('open', function() {
-    		ws.send('something');
+    		ws.send('dashboard_node_server');
 	});
 	ws.on('message', function(message) {
-    		console.log('received: %s', message);
-		var jsonMsg = JSON.parse(message);
-		var msgDead = {
-				value: jsonMsg.dead,
-				time_stamp: new Date().getTime()
-			};
-		newEventCallback(eventNames[0], msgDead);
-		var msgRetry = {
-				value: jsonMsg.retry,
-				time_stamp: new Date().getTime()
-			};
-		newEventCallback(eventNames[1], msgRetry);
-		var msgService = {
-				value: jsonMsg.service,
-				time_stamp: new Date().getTime()
-			};
-		newEventCallback(eventNames[2], msgService);	
-			
+		console.log('received: %s', message);
+    	if(message.indexOf("dead") > -1) {
+			var jsonMsg = JSON.parse(message);
+			var msgDead = {
+					value: jsonMsg.dead * 100,
+					time_stamp: jsonMsg.tick//new Date().getTime()
+				};
+			newEventCallback(eventNames[0], msgDead);
+			var msgRetry = {
+					value: jsonMsg.retry,
+					time_stamp: jsonMsg.tick//new Date().getTime()
+				};
+			newEventCallback(eventNames[1], msgRetry);
+			var msgService = {
+					value: jsonMsg.service,
+					time_stamp: jsonMsg.tick//new Date().getTime()
+				};
+			newEventCallback(eventNames[2], msgService);	
+		}
 	});
 
 
-	// Simulate the connection and new messages with a timer function
-//	setInterval(function() {
-//		for (var i=0; i<eventNames.length; i++) {
+//	 Simulate the connection and new messages with a timer function
+	/*setInterval(function() {
+		for (var i=0; i<eventNames.length; i++) {
 			
 			// construct message
-//			var oneHourInMilis = 3600000;
-//			var message = {
-//				value: Math.floor(Math.random()*101),
-//				time_stamp: new Date().getTime()
-//			};
+			var oneHourInMilis = 3600000;
+			var message = {
+				value: Math.floor(Math.random()*101),
+				time_stamp: new Date().getTime()
+			};
 			
 			
-//			newEventCallback(eventNames[i], message);
+			newEventCallback(eventNames[i], message);
 			
-//		}
-//	}, refreshTimer);
+		}
+	}, refreshTimer);*/
 	
 }
 
