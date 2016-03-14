@@ -15,7 +15,7 @@ var namespace = '/shows';
 var room = 'got';
 var refreshTimer = 1000; 
 var connectionscounter = 0;
-var eventNames = ['diversify.bipartite.dead', 'diversify.bipartite.retry', 'diversify.bipartite.service'];
+var eventNames = ['diversify.bipartite.dead', 'diversify.bipartite.retry', 'diversify.bipartite.service', 'diversify.bipartite.pausedplatforms', 'diversify.bipartite.initialclients', 'diversify.bipartite.initialplatforms', 'diversify.bipartite.initialservices', 'diversify.bipartite.monkey'];
 var serverport = 8181;
 
 /*
@@ -65,7 +65,32 @@ function connectToExternalSources() {
 					value: jsonMsg.service,
 					time_stamp: jsonMsg.tick//new Date().getTime()
 				};
-			newEventCallback(eventNames[2], msgService);	
+			newEventCallback(eventNames[2], msgService);
+			var msgPausedPlatforms = {
+					value: jsonMsg.pausedplatforms,
+					time_stamp: jsonMsg.tick
+				};
+			newEventCallback(eventNames[3], msgPausedPlatforms);
+			var msgInitialClients = {
+					value: jsonMsg.initialclients,
+					time_stamp: jsonMsg.tick
+				};
+			newEventCallback(eventNames[4], msgInitialClients);
+			var msgInitialPlatforms = {
+					value: jsonMsg.initialplatforms,
+					time_stamp: jsonMsg.tick
+				};
+			newEventCallback(eventNames[5], msgInitialPlatforms);
+			var msgInitialServices = {
+					value: jsonMsg.initialservices,
+					time_stamp: jsonMsg.tick
+				};
+			newEventCallback(eventNames[6], msgInitialServices);
+			var msgMonkey = {
+					value: jsonMsg.monkey,
+					time_stamp: jsonMsg.tick
+				};
+			newEventCallback(eventNames[7], msgMonkey);
 		}
 	});
 

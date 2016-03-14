@@ -102,7 +102,7 @@
 				{
 					"type": "gauge",
 					"settings": {
-						"value": "datasources[\"DiversifyNumberOfServiceAvailable\"][\"value\"]",
+						"value": "(datasources[\"DiversifyNumberOfPausedPlatforms\"][\"value\"]*100/datasources[\"DiversifyNumberOfInitialPlatforms\"][\"value\"]).toFixed(2)",
 						"units": "Unavailable server",
 						"min_value": 0,
 						"max_value": 100
@@ -112,7 +112,7 @@
 					"type": "indicator",
 					"settings": {
 						"title": "Monkey active",
-						"value": "datasources[\"DiversifyNumberOfServiceAvailable\"][\"value\"]>50",
+						"value": "datasources[\"DiversifyMonkey\"]",
 						"on_text": "Monkey ON",
 						"off_text": "Monkey OFF"
 					}
@@ -133,18 +133,18 @@
 				{
 					"type": "text_widget",
 					"settings": {
-						"title": "Initial number of  clients",
+						"title": "Initial number of Clients",
 						"size": "regular",
-						"value": "60",
+						"value": "datasources[\"DiversifyNumberOfInitialClients\"][\"value\"]",
 						"animate": true
 					}
 				},
 				{
 					"type": "text_widget",
 					"settings": {
-						"title": "Initial number of Server",
+						"title": "Initial number of Servers",
 						"size": "regular",
-						"value": "100",
+						"value": "datasources[\"DiversifyNumberOfInitialPlatforms\"][\"value\"]",
 						"animate": true
 					}
 				},
@@ -153,7 +153,7 @@
 					"settings": {
 						"title": "Initial number of Services",
 						"size": "regular",
-						"value": "500",
+						"value": "datasources[\"DiversifyNumberOfInitialServices\"][\"value\"]",
 						"animate": true
 					}
 				}
@@ -205,6 +205,96 @@
 				"events": [
 					{
 						"eventName": "diversify.bipartite.retry"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfPausedPlatforms",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.pausedplatforms"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfInitialClients",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.initialclients"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfInitialPlatforms",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.initialplatforms"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfInitialServices",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.initialservices"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyMonkey",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.monkey"
 					}
 				],
 				"rooms": [
