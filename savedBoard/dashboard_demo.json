@@ -1,0 +1,318 @@
+{
+	"version": 1,
+	"allow_edit": true,
+	"plugins": [],
+	"panes": [
+		{
+			"title": "Rate of unsatisfied request",
+			"width": 1,
+			"row": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col": {
+				"2": 1,
+				"3": 1,
+				"4": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"timeframe": 60,
+						"blocks": "4",
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"% of unstatisfied requests\"}, \"minorTickInterval\":\"auto\", \"floor\":0, \"min\": 0, \"max\":100}",
+						"series1": "datasources[\"DiversifyNumberOfUnsatisfiedRequest\"]",
+						"series1X": "time_stamp",
+						"series1Y": "value",
+						"series2": "",
+						"series2X": "",
+						"series2Y": "",
+						"series3": "",
+						"series3X": "",
+						"series3Y": ""
+					}
+				}
+			]
+		},
+		{
+			"title": "Number of available Services",
+			"width": 1,
+			"row": {
+				"4": 21,
+				"5": 1
+			},
+			"col": {
+				"4": 1,
+				"5": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"timeframe": 60,
+						"blocks": 4,
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0, \"min\":0}",
+						"series1": "datasources[\"DiversifyNumberOfServiceAvailable\"]",
+						"series1X": "time_stamp",
+						"series1Y": "value"
+					}
+				}
+			]
+		},
+		{
+			"title": "Monkey activity",
+			"width": 1,
+			"row": {
+				"4": 1,
+				"7": 1
+			},
+			"col": {
+				"4": 4,
+				"7": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "gauge",
+					"settings": {
+						"value": "(datasources[\"DiversifyNumberOfPausedPlatforms\"][\"value\"]*100/datasources[\"DiversifyNumberOfInitialPlatforms\"][\"value\"]).toFixed(2)",
+						"units": "Unavailable server",
+						"min_value": 0,
+						"max_value": 100
+					}
+				},
+				{
+					"type": "indicator",
+					"settings": {
+						"title": "Monkey active",
+						"value": "datasources[\"DiversifyMonkey\"]",
+						"on_text": "Monkey ON",
+						"off_text": "Monkey OFF"
+					}
+				}
+			]
+		},
+		{
+			"title": "Demonstration setup",
+			"width": 1,
+			"row": {
+				"4": 11,
+				"7": 11
+			},
+			"col": {
+				"4": 4,
+				"7": 4
+			},
+			"col_width": 1,
+			"widgets": [
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Initial number of Clients",
+						"size": "regular",
+						"value": "datasources[\"DiversifyNumberOfInitialClients\"][\"value\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Initial number of Servers",
+						"size": "regular",
+						"value": "datasources[\"DiversifyNumberOfInitialPlatforms\"][\"value\"]",
+						"animate": true
+					}
+				},
+				{
+					"type": "text_widget",
+					"settings": {
+						"title": "Initial number of Services",
+						"size": "regular",
+						"value": "datasources[\"DiversifyNumberOfInitialServices\"][\"value\"]",
+						"animate": true
+					}
+				}
+			]
+		},
+		{
+			"title": "Number of Request retry",
+			"width": 1,
+			"row": {
+				"4": 11,
+				"7": 21
+			},
+			"col": {
+				"4": 1,
+				"7": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"timeframe": 60,
+						"blocks": 4,
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
+						"series1": "datasources[\"DiversifyNumberOfRetry\"]",
+						"series1X": "time_stamp",
+						"series1Y": "value"
+					}
+				}
+			]
+		}
+	],
+	"datasources": [
+		{
+			"name": "DiversifyNumberOfUnsatisfiedRequest",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.dead"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfServiceAvailable",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.service"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfRetry",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.retry"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfPausedPlatforms",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.pausedplatforms"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfInitialClients",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.initialclients"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfInitialPlatforms",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.initialplatforms"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyNumberOfInitialServices",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.initialservices"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		},
+		{
+			"name": "DiversifyMonkey",
+			"type": "node_js",
+			"settings": {
+				"url": "http://localhost:8181/shows",
+				"events": [
+					{
+						"eventName": "diversify.bipartite.monkey"
+					}
+				],
+				"rooms": [
+					{
+						"roomName": "got",
+						"roomEvent": "subscribe"
+					}
+				]
+			}
+		}
+	],
+	"columns": 4
+}
