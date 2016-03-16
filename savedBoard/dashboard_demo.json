@@ -25,42 +25,15 @@
 						"blocks": "4",
 						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
 						"yaxis": "{\"title\":{\"text\" : \"% of unstatisfied requests\"}, \"minorTickInterval\":\"auto\", \"floor\":0, \"min\": 0, \"max\":100}",
-						"series1": "datasources[\"DiversifyNumberOfUnsatisfiedRequest\"]",
+						"series1": "datasources[\"Diversify\"].dead",
 						"series1X": "time_stamp",
 						"series1Y": "value",
-						"series2": "",
-						"series2X": "",
-						"series2Y": "",
-						"series3": "",
-						"series3X": "",
-						"series3Y": ""
-					}
-				}
-			]
-		},
-		{
-			"title": "Number of available Services",
-			"width": 1,
-			"row": {
-				"4": 21,
-				"5": 1
-			},
-			"col": {
-				"4": 1,
-				"5": 1
-			},
-			"col_width": 3,
-			"widgets": [
-				{
-					"type": "highcharts-timeseries",
-					"settings": {
-						"timeframe": 60,
-						"blocks": 4,
-						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
-						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0, \"min\":0}",
-						"series1": "datasources[\"DiversifyNumberOfServiceAvailable\"]",
-						"series1X": "time_stamp",
-						"series1Y": "value"
+						"series2": "datasources[\"Diversify\"].csvdead1",
+						"series2X": "time_stamp",
+						"series2Y": "value",
+						"series3": "datasources[\"Diversify\"].csvdead2",
+						"series3X": "time_stamp",
+						"series3Y": "value"
 					}
 				}
 			]
@@ -69,11 +42,17 @@
 			"title": "Monkey activity",
 			"width": 1,
 			"row": {
+				"3": 11,
 				"4": 1,
+				"5": 1,
+				"6": 1,
 				"7": 1
 			},
 			"col": {
+				"3": 1,
 				"4": 4,
+				"5": 4,
+				"6": 4,
 				"7": 4
 			},
 			"col_width": 1,
@@ -81,8 +60,8 @@
 				{
 					"type": "gauge",
 					"settings": {
-						"value": "(datasources[\"DiversifyNumberOfPausedPlatforms\"][\"value\"]*100/datasources[\"DiversifyNumberOfInitialPlatforms\"][\"value\"]).toFixed(2)",
-						"units": "Unavailable server",
+						"value": "(datasources[\"Diversify\"].pausedplatforms*100/datasources[\"Diversify\"].initialplatforms).toFixed(2)",
+						"units": "% unavailable servers",
 						"min_value": 0,
 						"max_value": 100
 					}
@@ -91,7 +70,7 @@
 					"type": "indicator",
 					"settings": {
 						"title": "Monkey active",
-						"value": "datasources[\"DiversifyMonkey\"]",
+						"value": "datasources[\"Diversify\"].monkey",
 						"on_text": "Monkey ON",
 						"off_text": "Monkey OFF"
 					}
@@ -102,11 +81,17 @@
 			"title": "Demonstration setup",
 			"width": 1,
 			"row": {
+				"3": 11,
 				"4": 11,
+				"5": 11,
+				"6": 11,
 				"7": 11
 			},
 			"col": {
+				"3": 2,
 				"4": 4,
+				"5": 4,
+				"6": 4,
 				"7": 4
 			},
 			"col_width": 1,
@@ -116,7 +101,7 @@
 					"settings": {
 						"title": "Initial number of Clients",
 						"size": "regular",
-						"value": "datasources[\"DiversifyNumberOfInitialClients\"][\"value\"]",
+						"value": "datasources[\"Diversify\"].initialclients",
 						"animate": true
 					}
 				},
@@ -125,7 +110,7 @@
 					"settings": {
 						"title": "Initial number of Servers",
 						"size": "regular",
-						"value": "datasources[\"DiversifyNumberOfInitialPlatforms\"][\"value\"]",
+						"value": "datasources[\"Diversify\"].initialplatforms",
 						"animate": true
 					}
 				},
@@ -134,7 +119,7 @@
 					"settings": {
 						"title": "Initial number of Services",
 						"size": "regular",
-						"value": "datasources[\"DiversifyNumberOfInitialServices\"][\"value\"]",
+						"value": "datasources[\"Diversify\"].initialservices",
 						"animate": true
 					}
 				}
@@ -144,11 +129,17 @@
 			"title": "Number of Request retry",
 			"width": 1,
 			"row": {
+				"3": 21,
 				"4": 11,
+				"5": 21,
+				"6": 21,
 				"7": 21
 			},
 			"col": {
+				"3": 1,
 				"4": 1,
+				"5": 1,
+				"6": 1,
 				"7": 1
 			},
 			"col_width": 3,
@@ -160,9 +151,54 @@
 						"blocks": 4,
 						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
 						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0}",
-						"series1": "datasources[\"DiversifyNumberOfRetry\"]",
+						"series1": "datasources[\"Diversify\"].retry",
 						"series1X": "time_stamp",
-						"series1Y": "value"
+						"series1Y": "value",
+						"series2": "datasources[\"Diversify\"].csvretry1",
+						"series2X": "time_stamp",
+						"series2Y": "value",
+						"series3": "datasources[\"Diversify\"].csvretry2",
+						"series3X": "time_stamp",
+						"series3Y": "value"
+					}
+				}
+			]
+		},
+		{
+			"title": "Number of available Services",
+			"width": 1,
+			"row": {
+				"3": 31,
+				"4": 21,
+				"5": 1,
+				"7": 1,
+				"8": 1
+			},
+			"col": {
+				"3": 1,
+				"4": 1,
+				"5": 1,
+				"7": 1,
+				"8": 1
+			},
+			"col_width": 3,
+			"widgets": [
+				{
+					"type": "highcharts-timeseries",
+					"settings": {
+						"timeframe": 60,
+						"blocks": 4,
+						"xaxis": "{\"title\":{\"text\" : \"Time\"}, \"type\": \"int\", \"floor\":0}",
+						"yaxis": "{\"title\":{\"text\" : \"Values\"}, \"minorTickInterval\":\"auto\", \"floor\":0, \"min\":0}",
+						"series1": "datasources[\"Diversify\"].service",
+						"series1X": "time_stamp",
+						"series1Y": "value",
+						"series2": "datasources[\"Diversify\"].csvservice1",
+						"series2X": "time_stamp",
+						"series2Y": "value",
+						"series3": "datasources[\"Diversify\"].csvservice2",
+						"series3X": "time_stamp",
+						"series3Y": "value"
 					}
 				}
 			]
@@ -170,147 +206,10 @@
 	],
 	"datasources": [
 		{
-			"name": "DiversifyNumberOfUnsatisfiedRequest",
-			"type": "node_js",
+			"name": "Diversify",
+			"type": "JSON WebSocket",
 			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.dead"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
-			}
-		},
-		{
-			"name": "DiversifyNumberOfServiceAvailable",
-			"type": "node_js",
-			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.service"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
-			}
-		},
-		{
-			"name": "DiversifyNumberOfRetry",
-			"type": "node_js",
-			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.retry"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
-			}
-		},
-		{
-			"name": "DiversifyNumberOfPausedPlatforms",
-			"type": "node_js",
-			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.pausedplatforms"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
-			}
-		},
-		{
-			"name": "DiversifyNumberOfInitialClients",
-			"type": "node_js",
-			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.initialclients"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
-			}
-		},
-		{
-			"name": "DiversifyNumberOfInitialPlatforms",
-			"type": "node_js",
-			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.initialplatforms"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
-			}
-		},
-		{
-			"name": "DiversifyNumberOfInitialServices",
-			"type": "node_js",
-			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.initialservices"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
-			}
-		},
-		{
-			"name": "DiversifyMonkey",
-			"type": "node_js",
-			"settings": {
-				"url": "http://localhost:8181/shows",
-				"events": [
-					{
-						"eventName": "diversify.bipartite.monkey"
-					}
-				],
-				"rooms": [
-					{
-						"roomName": "got",
-						"roomEvent": "subscribe"
-					}
-				]
+				"url": "ws://localhost:8099"
 			}
 		}
 	],
