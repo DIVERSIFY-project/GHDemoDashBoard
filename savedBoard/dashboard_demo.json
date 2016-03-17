@@ -60,7 +60,7 @@
 				{
 					"type": "gauge",
 					"settings": {
-						"value": "(datasources[\"Diversify\"].pausedplatforms*100/datasources[\"Diversify\"].initialplatforms).toFixed(2)",
+						"value": "(datasources[\"Diversify\"].ratio*100).toFixed(2)",
 						"units": "% unavailable servers",
 						"min_value": 0,
 						"max_value": 100
